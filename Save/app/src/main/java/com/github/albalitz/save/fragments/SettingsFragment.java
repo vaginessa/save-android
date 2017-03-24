@@ -1,6 +1,7 @@
 package com.github.albalitz.save.fragments;
 
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
 
 import com.github.albalitz.save.R;
@@ -15,5 +16,17 @@ public class SettingsFragment extends PreferenceFragment {
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
+
+        setValuesAsSummary();
+    }
+
+    /**
+     * Get the values of specific preferences
+     * and set those as the summary,
+     * so the values are visible on the preferences screen.
+     */
+    private void setValuesAsSummary() {
+        EditTextPreference apiUrlEditText = (EditTextPreference) findPreference("pref_key_api_url");
+        apiUrlEditText.setSummary(apiUrlEditText.getSummary() + ": " + apiUrlEditText.getText());
     }
 }
