@@ -6,10 +6,14 @@
     <string name="pref_api_cat_title">API</string>
 
     <!-- dialogs -->
+    <string name="save">Save</string>
     <string name="ok">Ok</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
 
     <!-- link actions dialog -->
-    <string name="dialog_link_actions_title">Choose what to do</string>
+    <string name="dialog_link_actions_title">Choose your action</string>
+
+    <!-- link save dialog -->
+    <string name="dialog_save_link_title">Save a link</string>
 </resources>
