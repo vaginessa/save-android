@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +23,7 @@ import com.github.albalitz.save.utils.Utils;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener {
+        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener, SnackbarActivity{
 
     private Context context;
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.showSnackbar(view, "TODO: SAVE STUFF");
+                Utils.showSnackbar(MainActivity.this, "TODO: SAVE STUFF");
             }
         });
 
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Link clickedLink = savedLinks.get(position);
-                Utils.showSnackbar(view, "Opening link...");
+                Utils.showSnackbar(MainActivity.this, "Opening link...");
                 Utils.openInExternalBrowser(context, clickedLink.url());
             }
         });
@@ -139,5 +138,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDialogDismiss(DialogFragment dialog) {
         selectedLink = null;
+    }
+
+    /*
+     * Implement SnackbarActivity
+     */
+    @Override
+    public View viewFromActivity() {
+        return findViewById(R.id.listViewSavedLinks);
     }
 }

@@ -1,10 +1,13 @@
 package com.github.albalitz.save.api;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.github.albalitz.save.SaveApplication;
 import com.github.albalitz.save.activities.SavedLinksListActivity;
+import com.github.albalitz.save.activities.SnackbarActivity;
+import com.github.albalitz.save.utils.Utils;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -12,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
