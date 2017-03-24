@@ -41,8 +41,8 @@ public class Api {
         JsonHttpResponseHandler jsonHttpResponseHandler = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                Log.d("api", "Got " + response.length() + " links from the API.");
-                List<Link> savedLinks = new ArrayList<>();
+                Log.d("api", "Got " + response.length() + " links from the API: " + response);
+                ArrayList<Link> savedLinks = new ArrayList<>();
 
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject linkJson = new JSONObject();
