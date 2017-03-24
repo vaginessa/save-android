@@ -24,7 +24,7 @@ public class Api {
         this.callingActivity = callingActivity;
     }
 
-    public void savedLinks() {
+    public void updateSavedLinks() {
         String url = this.prefs.getString("pref_key_api_url", null);
         if (url == null) {
             Log.e(this.toString(), "No URL set in the preferences!");
