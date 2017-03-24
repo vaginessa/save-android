@@ -2,15 +2,35 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/pref_api_cat_title"
-        android:key="pref_key_weather_settings">
+        android:key="pref_key_api_settings">
 
         <EditTextPreference
             android:key="pref_key_api_url"
-            android:summary="@string/pref_api_url_summary"
-            android:dialogTitle="@string/pref_api_url_dialog_title"
+            android:summary="URL"
+            android:dialogTitle="Set the URL to the API"
             android:dialogIcon="@drawable/ic_pref_api_url_dialog"
             android:negativeButtonText="@string/cancel"
-            android:positiveButtonText="@string/accept"
-            android:hint="@string/pref_api_url_dialog_title" />
+            android:positiveButtonText="@string/accept" />
+
+        <!-- user sub-preferences -->
+        <PreferenceScreen
+            android:title="User">
+            <EditTextPreference
+                android:key="pref_key_api_username"
+                android:summary="Username"
+                android:dialogTitle="Set your username"
+                android:dialogIcon="@drawable/ic_pref_api_username_dialog"
+                android:negativeButtonText="@string/cancel"
+                android:positiveButtonText="@string/accept" />
+
+            <EditTextPreference
+                android:key="pref_key_api_password"
+                android:summary="Password"
+                android:dialogTitle="Set your password"
+                android:password="true"
+                android:dialogIcon="@drawable/ic_pref_api_password_dialog"
+                android:negativeButtonText="@string/cancel"
+                android:positiveButtonText="@string/accept" />
+        </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>
