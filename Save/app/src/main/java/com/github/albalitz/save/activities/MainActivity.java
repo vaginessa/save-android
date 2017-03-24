@@ -1,5 +1,6 @@
 package com.github.albalitz.save.activities;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import com.github.albalitz.save.R;
 import com.github.albalitz.save.api.Api;
 import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
 import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.LinkAdapter;
 import com.github.albalitz.save.utils.Utils;
@@ -21,15 +23,17 @@ import com.github.albalitz.save.utils.Utils;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements SavedLinksListActivity {
+        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener, SnackbarActivity{
 
     private Context context;
 
     private ListView listViewSavedLinks;
     private LinkAdapter adapter;
     private ArrayList<Link> savedLinks;
+    private Link selectedLink;
 
     private Api api;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.showSnackbar(view, "TODO: SAVE STUFF");
+                Utils.showSnackbar(MainActivity.this, "TODO: SAVE STUFF");
             }
         });
 
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Link clickedLink = savedLinks.get(position);
-                Utils.showSnackbar(view, "Opening link...");
+                Utils.showSnackbar(MainActivity.this, "Opening link...");
                 Utils.openInExternalBrowser(context, clickedLink.url());
             }
         });
@@ -102,9 +106,45 @@ public class MainActivity extends AppCompatActivity
         listViewSavedLinks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // todo: show modal with options concerning selected Link
-                return false;
+                selectedLink = savedLinks.get(position);
+                LinkActionsDialogFragment linkActionsDialogFragment = new LinkActionsDialogFragment();
+                linkActionsDialogFragment.show(getFragmentManager(), "actions");
+                return true;
             }
         });
+    }
+
+    /*
+     * Implement link dialog actions
+     */
+    @Override
+    public void onSelectLinkOpen(DialogFragment dialog) {
+        if (selectedLink == null) {
+            return;
+        }
+
+        Utils.openInExternalBrowser(context, selectedLink.url());
+    }
+
+    @Override
+    public void onSelectLinkDelete(DialogFragment dialog) {
+        if (selectedLink == null) {
+            return;
+        }
+
+        api.deleteLink(selectedLink);
+    }
+
+    @Override
+    public void onDialogDismiss(DialogFragment dialog) {
+        selectedLink = null;
+    }
+
+    /*
+     * Implement SnackbarActivity
+     */
+    @Override
+    public View viewFromActivity() {
+        return findViewById(R.id.listViewSavedLinks);
     }
 }
