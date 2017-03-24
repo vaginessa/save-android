@@ -82,4 +82,43 @@ public class Api {
                 null,  // request params
                 jsonHttpResponseHandler);
     }
+
+
+    public void deleteLink(Link link) {
+        Log.d("api", "Deleting link: " + link.toString() + " ...");
+
+        String url = this.prefs.getString("pref_key_api_url", null);
+        if (url == null) {
+            Log.e(this.toString(), "No URL set in the preferences!");
+            return;
+        } else {
+            url += "/links/" + link.id();
+        }
+
+        JsonHttpResponseHandler jsonHttpResponseHandler = new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (!response.has("success")) {
+                    // todo: show error
+                }
+
+                Utils.showSnackbar((SnackbarActivity) callingActivity, "Deleted link.");
+
+                // also update the list view
+                updateSavedLinks();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                // todo
+            }
+        };
+
+        Log.i("api", "Deleting link: " + link.toString() + " ...");
+        Request.delete(url,
+                prefs.getString("pref_key_api_username", null),
+                prefs.getString("pref_key_api_password", null),
+                null,  // request params
+                jsonHttpResponseHandler);
+    }
 }

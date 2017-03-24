@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        // todo: delete
+        api.deleteLink(selectedLink);
     }
 
     @Override
