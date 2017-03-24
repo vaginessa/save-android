@@ -18,5 +18,8 @@
         android:id="@+id/listViewSavedLinks"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:choiceMode="singleChoice" />
+        android:choiceMode="singleChoice"
+        android:clickable="false"
+        android:dividerHeight="1px"
+        android:divider="@color/colorAccent" />
 </RelativeLayout>
