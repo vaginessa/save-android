@@ -8,11 +8,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.ListView;
+
 import com.github.albalitz.save.R;
+import com.github.albalitz.save.api.Api;
+import com.github.albalitz.save.api.Link;
 import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.Utils;
+import com.github.albalitz.save.utils.LinkAdapter;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity
+        implements SavedLinksListActivity {
+
+    private ListView listViewSavedLinks;
+    private LinkAdapter adapter;
+
+    private Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // assign content
+        listViewSavedLinks = (ListView) findViewById(R.id.listViewSavedLinks);
+
+        // prepare stuff
+        api = new Api(this);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 Utils.showSnackbar(view, "TODO: SAVE STUFF");
             }
         });
+
+        // do actual stuff
+        api.updateSavedLinks();
     }
 
     @Override
@@ -49,5 +71,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void onSavedLinksUpdate(ArrayList<Link> savedLinks) {
+        adapter = new LinkAdapter(this, savedLinks);
+        this.listViewSavedLinks.setAdapter(adapter);
     }
 }
