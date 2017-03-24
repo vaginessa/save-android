@@ -1,5 +1,6 @@
 package com.github.albalitz.save.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,23 +8,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.albalitz.save.R;
 import com.github.albalitz.save.api.Api;
 import com.github.albalitz.save.api.Link;
 import com.github.albalitz.save.utils.ActivityUtils;
-import com.github.albalitz.save.utils.Utils;
 import com.github.albalitz.save.utils.LinkAdapter;
+import com.github.albalitz.save.utils.Utils;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements SavedLinksListActivity {
 
+    private Context context;
+
     private ListView listViewSavedLinks;
     private LinkAdapter adapter;
+    private ArrayList<Link> savedLinks;
 
     private Api api;
 
@@ -34,11 +38,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        this.context = this;
+
         // assign content
         listViewSavedLinks = (ListView) findViewById(R.id.listViewSavedLinks);
 
         // prepare stuff
         api = new Api(this);
+        prepareListViewListeners();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +81,30 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
     public void onSavedLinksUpdate(ArrayList<Link> savedLinks) {
+        this.savedLinks = savedLinks;
         adapter = new LinkAdapter(this, savedLinks);
         this.listViewSavedLinks.setAdapter(adapter);
+    }
+
+
+    private void prepareListViewListeners() {
+        listViewSavedLinks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Link clickedLink = savedLinks.get(position);
+                Utils.showSnackbar(view, "Opening link...");
+                Utils.openInExternalBrowser(context, clickedLink.url());
+            }
+        });
+
+        listViewSavedLinks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // todo: show modal with options concerning selected Link
+                return false;
+            }
+        });
     }
 }
