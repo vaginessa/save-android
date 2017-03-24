@@ -37,6 +37,10 @@ public class Link {
         this.updatedOn = updatedOn;
     }
 
+    public String toString() {
+        return this.annotation + " (" + this.url + ")";
+    }
+
     public int id() {
         return id;
     }
