@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- actions for the link actions dialog -->
+    <string-array name="link_actions_keys">
+        <item>Open</item>
+        <item>Delete</item>
+    </string-array>
+</resources>
