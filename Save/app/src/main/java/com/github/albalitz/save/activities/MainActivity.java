@@ -1,10 +1,12 @@
 package com.github.albalitz.save.activities;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,13 +24,14 @@ import com.github.albalitz.save.utils.Utils;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements SavedLinksListActivity {
+        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener {
 
     private Context context;
 
     private ListView listViewSavedLinks;
     private LinkAdapter adapter;
     private ArrayList<Link> savedLinks;
+    private Link selectedLink;
 
     private Api api;
 
@@ -104,10 +107,37 @@ public class MainActivity extends AppCompatActivity
         listViewSavedLinks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedLink = savedLinks.get(position);
                 LinkActionsDialogFragment linkActionsDialogFragment = new LinkActionsDialogFragment();
                 linkActionsDialogFragment.show(getFragmentManager(), "actions");
                 return true;
             }
         });
+    }
+
+    /*
+     * Implement link dialog actions
+     */
+    @Override
+    public void onSelectLinkOpen(DialogFragment dialog) {
+        if (selectedLink == null) {
+            return;
+        }
+
+        Utils.openInExternalBrowser(context, selectedLink.url());
+    }
+
+    @Override
+    public void onSelectLinkDelete(DialogFragment dialog) {
+        if (selectedLink == null) {
+            return;
+        }
+
+        // todo: delete
+    }
+
+    @Override
+    public void onDialogDismiss(DialogFragment dialog) {
+        selectedLink = null;
     }
 }
