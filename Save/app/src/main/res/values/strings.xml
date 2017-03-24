@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Save</string>
     <string name="action_settings">Settings</string>
+
+    <!-- preferences -->
+    <string name="pref_api_cat_title">API</string>
+    <string name="pref_api_url_summary">API URL</string>
+    <string name="pref_api_url_dialog_title">Set the URL to the API</string>
+
+    <!-- dialogs -->
+    <string name="ok">Ok</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
 </resources>
