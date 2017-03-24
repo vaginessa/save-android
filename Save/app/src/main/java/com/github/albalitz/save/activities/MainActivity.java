@@ -1,4 +1,4 @@
-package com.github.albalitz.save;
+package com.github.albalitz.save.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.albalitz.save.R;
 import com.github.albalitz.save.utils.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity {

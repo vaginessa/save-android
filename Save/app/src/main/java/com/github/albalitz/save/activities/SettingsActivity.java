@@ -1,4 +1,4 @@
-package com.github.albalitz.save;
+package com.github.albalitz.save.activities;
 
 import android.app.Activity;
 import android.os.Bundle;

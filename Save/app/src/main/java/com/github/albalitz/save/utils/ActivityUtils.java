@@ -3,7 +3,7 @@ package com.github.albalitz.save.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.github.albalitz.save.SettingsActivity;
+import com.github.albalitz.save.activities.SettingsActivity;
 
 /**
  * This class contains static methods for starting global activities
