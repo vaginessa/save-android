@@ -33,4 +33,15 @@
                 android:positiveButtonText="@string/accept" />
         </PreferenceScreen>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="About">
+        <Preference
+            android:title="Developed by Aljosha Balitzki" />
+        <Preference
+            android:title="View repository">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/albalitz/save-android" />
+        </Preference>
+    </PreferenceCategory>
 </PreferenceScreen>
