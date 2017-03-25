@@ -186,7 +186,7 @@ public class Api {
                         .putString("pref_key_api_password", password)
                         .apply();
 
-                callingActivity.onRegistrationSuccess("Welcome, " + username + "!");
+                callingActivity.onRegistrationSuccess();
             }
 
             @Override
