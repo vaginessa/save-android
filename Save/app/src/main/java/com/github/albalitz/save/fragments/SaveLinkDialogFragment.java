@@ -44,7 +44,7 @@ public class SaveLinkDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int id) {
                 String url = ((TextView) getDialog().findViewById(R.id.save_dialog_link_url)).getText().toString();
                 String annotation = ((TextView) getDialog().findViewById(R.id.save_dialog_link_annotation)).getText().toString();
-                if (url.isEmpty()) {
+                if (url.isEmpty() || url.equals("http://") || url.equals("https://")) {
                     Utils.showToast(listener, "Please enter a URL.");
                     // todo: disable this button while no url is entered!
                     return;
