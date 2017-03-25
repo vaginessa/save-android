@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.albalitz.save.activities.SnackbarActivity;
 
@@ -16,6 +17,10 @@ public class Utils {
         View viewFromActivity = callingActivity.viewFromActivity();
         Snackbar.make(viewFromActivity, text, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+    }
+
+    public static void showToast(Context context, String text) {
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
     public static void openInExternalBrowser(Context context, String url) {
