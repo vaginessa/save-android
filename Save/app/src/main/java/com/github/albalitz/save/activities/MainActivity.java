@@ -1,5 +1,6 @@
 package com.github.albalitz.save.activities;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.albalitz.save.R;
@@ -26,6 +28,9 @@ import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.LinkAdapter;
 import com.github.albalitz.save.utils.Utils;
 
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -85,7 +90,38 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
 
+
         api.updateSavedLinks();
+
+        // Handle stuff being shared to this app from another app
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        if (action.equals(Intent.ACTION_SEND) && type != null) {
+            if (type.equals("text/plain")) {
+                handleSendIntent(intent);
+            }
+        }
+    }
+
+    private void handleSendIntent(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText == null) {
+            Utils.showToast(context, "No data found.");
+            finish();
+        }
+
+        Log.d(this.toString(), "Got shared text: " + sharedText);
+        Link link = new Link(sharedText, "");  // todo: allow user to edit before saving
+
+        Utils.showSnackbar(this, "Saving link...");
+        try {
+            api.saveLink(link);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
