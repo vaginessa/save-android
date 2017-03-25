@@ -12,5 +12,5 @@ public interface ApiActivity {
     void onSavedLinksUpdate(ArrayList<Link> savedLinks);
 
     void onRegistrationError(String errorMessage);
-    void onRegistrationSuccess(String successMessage);
+    void onRegistrationSuccess();
 }

@@ -162,7 +162,7 @@ public class Api {
     }
 
 
-    public void registerUser(final String username, String password) throws JSONException, UnsupportedEncodingException {
+    public void registerUser(final String username, final String password) throws JSONException, UnsupportedEncodingException {
         Log.d("api", "Registering user ...");
 
         String url = this.prefs.getString("pref_key_api_url", null);
@@ -180,7 +180,13 @@ public class Api {
                     // todo: show error
                 }
 
-                Utils.showSnackbar((SnackbarActivity) callingActivity, "Welcome, " + username + "!");
+                Log.i("api register success", "Persisting newly registered user to preferences.");
+                prefs.edit()
+                        .putString("pref_key_api_username", username)
+                        .putString("pref_key_api_password", password)
+                        .apply();
+
+                callingActivity.onRegistrationSuccess("Welcome, " + username + "!");
             }
 
             @Override

@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
     public void onRegistrationError(String errorMessage) {}
 
     @Override
-    public void onRegistrationSuccess(String successMessage) {}
+    public void onRegistrationSuccess() {}
 
 
     private void prepareListViewListeners() {
