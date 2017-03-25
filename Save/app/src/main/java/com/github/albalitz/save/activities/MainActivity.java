@@ -16,6 +16,7 @@ import com.github.albalitz.save.R;
 import com.github.albalitz.save.api.Api;
 import com.github.albalitz.save.api.Link;
 import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
+import com.github.albalitz.save.fragments.SaveLinkDialogFragment;
 import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.LinkAdapter;
 import com.github.albalitz.save.utils.Utils;
@@ -55,7 +56,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.showSnackbar(MainActivity.this, "TODO: SAVE STUFF");
+                SaveLinkDialogFragment saveLinkDialogFragment = new SaveLinkDialogFragment();
+                saveLinkDialogFragment.show(getFragmentManager(), "save");
             }
         });
 
@@ -112,6 +114,10 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
+    }
+
+    public Api getApi() {
+        return this.api;
     }
 
     /*

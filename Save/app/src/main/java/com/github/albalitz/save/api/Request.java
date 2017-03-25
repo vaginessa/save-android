@@ -1,8 +1,15 @@
 package com.github.albalitz.save.api;
 
+import com.github.albalitz.save.SaveApplication;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 /**
  * Wrapper class for HTTP requests.
@@ -15,9 +22,12 @@ public class Request {
         client.get(url, params, responseHandler);
     }
 
-    public static void post(String url, String username, String password, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+    public static void post(String url, String username, String password, JSONObject json, AsyncHttpResponseHandler responseHandler) throws UnsupportedEncodingException {
         client.setBasicAuth(username, password);
-        client.post(url, params, responseHandler);
+
+        // See http://stackoverflow.com/questions/13052036/posting-json-xml-using-android-async-http-loopj
+        // for the example I based this on.
+        client.post(SaveApplication.getAppContext(), url, new StringEntity(json.toString()), "application/json", responseHandler);
     }
 
     public static void delete(String url, String username, String password, RequestParams params, AsyncHttpResponseHandler responseHandler) {
