@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,9 +25,11 @@ import com.github.albalitz.save.utils.Utils;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener, SnackbarActivity{
+        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener, SnackbarActivity, SwipeRefreshLayout.OnRefreshListener {
 
     private Context context;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ListView listViewSavedLinks;
     private LinkAdapter adapter;
@@ -46,11 +49,13 @@ public class MainActivity extends AppCompatActivity
         this.context = this;
 
         // assign content
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         listViewSavedLinks = (ListView) findViewById(R.id.listViewSavedLinks);
 
         // prepare stuff
         api = new Api(this);
         prepareListViewListeners();
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity
         this.savedLinks = savedLinks;
         adapter = new LinkAdapter(this, savedLinks);
         this.listViewSavedLinks.setAdapter(adapter);
+        this.swipeRefreshLayout.setRefreshing(false);
     }
 
 
@@ -152,5 +158,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public View viewFromActivity() {
         return findViewById(R.id.listViewSavedLinks);
+    }
+
+    /*
+     * SwipeRefreshLayout.OnRefreshListener methods
+     */
+    @Override
+    public void onRefresh() {
+        api.updateSavedLinks();
     }
 }
