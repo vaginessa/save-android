@@ -4,16 +4,29 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.github.albalitz.save.R;
+import com.github.albalitz.save.activities.MainActivity;
+import com.github.albalitz.save.activities.SnackbarActivity;
+import com.github.albalitz.save.api.Api;
+import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.utils.Utils;
+
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by albalitz on 3/24/17.
  */
 public class SaveLinkDialogFragment extends DialogFragment {
-    Activity listener;
+
+    private Activity listener;
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -29,7 +42,24 @@ public class SaveLinkDialogFragment extends DialogFragment {
 
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
+                String url = ((TextView) getDialog().findViewById(R.id.save_dialog_link_url)).getText().toString();
+                String annotation = ((TextView) getDialog().findViewById(R.id.save_dialog_link_annotation)).getText().toString();
+                if (url.isEmpty()) {
+                    Utils.showToast(listener, "Please enter a URL.");
+                    // todo: disable this button while no url is entered!
+                    return;
+                }
+                Link link = new Link(url, annotation);
+
+                Utils.showSnackbar((SnackbarActivity) listener, "Saving link...");
+                Api api = ((MainActivity) listener).getApi();
+                try {
+                    api.saveLink(link);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

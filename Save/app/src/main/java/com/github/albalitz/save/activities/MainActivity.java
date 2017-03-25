@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    public Api getApi() {
+        return this.api;
+    }
+
     /*
      * Implement link dialog actions
      */
