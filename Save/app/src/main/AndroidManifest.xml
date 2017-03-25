@@ -17,17 +17,25 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- allow sharing to this app -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
             android:theme="@style/PreferenceTheme" />
-        <activity android:name=".activities.RegisterActivity"
+        <activity
+            android:name=".activities.RegisterActivity"
             android:label="Register">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.PREFERENCE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
