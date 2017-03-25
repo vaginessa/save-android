@@ -2,11 +2,14 @@ package com.github.albalitz.save.activities;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.albalitz.save.R;
+import com.github.albalitz.save.SaveApplication;
 import com.github.albalitz.save.api.Api;
 import com.github.albalitz.save.api.Link;
 import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity
     private Link selectedLink;
 
     private Api api;
+
+    private SharedPreferences prefs = SaveApplication.getSharedPreferences();
 
 
     @Override
@@ -67,6 +73,16 @@ public class MainActivity extends AppCompatActivity
         });
 
         // do actual stuff
+        if (prefs.getString("pref_key_api_username", "").isEmpty()
+                || prefs.getString("pref_key_api_password", "").isEmpty()) {
+            Log.w(this.toString(), "No credentials found. Opening registration.");
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        } else {
+            Log.i(this.toString(), prefs.getString("pref_key_api_username", "no username"));
+            Log.i(this.toString(), prefs.getString("pref_key_api_password", "no password"));
+        }
+
         api.updateSavedLinks();
     }
 
