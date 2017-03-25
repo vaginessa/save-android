@@ -24,6 +24,10 @@ public class Utils {
     }
 
     public static void openInExternalBrowser(Context context, String url) {
+        if (!url.startsWith("http")) {
+            url = "https://" + url;
+        }
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
