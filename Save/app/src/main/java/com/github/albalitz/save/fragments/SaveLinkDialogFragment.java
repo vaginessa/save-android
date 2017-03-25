@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.albalitz.save.R;
@@ -42,8 +42,8 @@ public class SaveLinkDialogFragment extends DialogFragment {
 
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                String url = ((TextView) getDialog().findViewById(R.id.save_dialog_link_url)).getText().toString();
-                String annotation = ((TextView) getDialog().findViewById(R.id.save_dialog_link_annotation)).getText().toString();
+                String url = ((EditText) getDialog().findViewById(R.id.save_dialog_link_url)).getText().toString();
+                String annotation = ((EditText) getDialog().findViewById(R.id.save_dialog_link_annotation)).getText().toString();
                 if (url.isEmpty() || url.equals("http://") || url.equals("https://")) {
                     Utils.showToast(listener, "Please enter a URL.");
                     // todo: disable this button while no url is entered!

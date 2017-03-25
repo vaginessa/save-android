@@ -103,7 +103,7 @@ public class Api {
                     // todo: show error
                 }
 
-                Utils.showSnackbar((SnackbarActivity) callingActivity, "Saved link.");
+                Utils.showSnackbar((SnackbarActivity) callingActivity, "Link saved.");
 
                 // also update the list view
                 updateSavedLinks();
