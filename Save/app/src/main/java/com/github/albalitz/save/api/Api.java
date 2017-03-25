@@ -4,11 +4,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.github.albalitz.save.SaveApplication;
-import com.github.albalitz.save.activities.SavedLinksListActivity;
+import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
 import com.github.albalitz.save.utils.Utils;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +15,6 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -26,9 +24,9 @@ import cz.msebera.android.httpclient.Header;
 public class Api {
 
     private SharedPreferences prefs;
-    private SavedLinksListActivity callingActivity;
+    private ApiActivity callingActivity;
 
-    public Api(SavedLinksListActivity callingActivity) {
+    public Api(ApiActivity callingActivity) {
         this.prefs = SaveApplication.getSharedPreferences();
         this.callingActivity = callingActivity;
     }

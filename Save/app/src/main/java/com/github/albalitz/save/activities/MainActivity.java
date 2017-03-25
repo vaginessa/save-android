@@ -25,7 +25,7 @@ import com.github.albalitz.save.utils.Utils;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements SavedLinksListActivity, LinkActionsDialogFragment.LinkActionListener, SnackbarActivity, SwipeRefreshLayout.OnRefreshListener {
+        implements ApiActivity, LinkActionsDialogFragment.LinkActionListener, SnackbarActivity, SwipeRefreshLayout.OnRefreshListener {
 
     private Context context;
 
@@ -92,13 +92,19 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
+    @Override
     public void onSavedLinksUpdate(ArrayList<Link> savedLinks) {
         this.savedLinks = savedLinks;
         adapter = new LinkAdapter(this, savedLinks);
         this.listViewSavedLinks.setAdapter(adapter);
         this.swipeRefreshLayout.setRefreshing(false);
     }
+
+    @Override
+    public void onRegistrationError(String errorMessage) {}
+
+    @Override
+    public void onRegistrationSuccess(String successMessage) {}
 
 
     private void prepareListViewListeners() {
