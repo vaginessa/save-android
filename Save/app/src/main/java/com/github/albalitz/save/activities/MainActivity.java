@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity
         });
 
         // do actual stuff
+        if (prefs.getString("pref_key_api_url", "").isEmpty()) {
+            Utils.showToast(context, "Please configure the API's URL.");
+            ActivityUtils.openSettings(this);
+        }
+
         if (prefs.getString("pref_key_api_username", "").isEmpty()
                 || prefs.getString("pref_key_api_password", "").isEmpty()) {
             Log.w(this.toString(), "No credentials found. Opening registration.");
