@@ -78,9 +78,6 @@ public class MainActivity extends AppCompatActivity
             Log.w(this.toString(), "No credentials found. Opening registration.");
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
-        } else {
-            Log.i(this.toString(), prefs.getString("pref_key_api_username", "no username"));
-            Log.i(this.toString(), prefs.getString("pref_key_api_password", "no password"));
         }
 
         api.updateSavedLinks();
