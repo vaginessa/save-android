@@ -5,6 +5,9 @@
     <!-- preferences -->
     <string name="pref_api_cat_title">API</string>
 
+    <!-- registration -->
+    <string name="button_register">Register</string>
+
     <!-- dialogs -->
     <string name="save">Save</string>
     <string name="ok">Ok</string>
