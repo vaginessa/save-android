@@ -31,6 +31,12 @@
                 android:dialogIcon="@drawable/ic_pref_api_password_dialog"
                 android:negativeButtonText="@string/cancel"
                 android:positiveButtonText="@string/accept" />
+
+            <Preference
+                android:title="Register an account"
+                android:dependency="pref_key_api_url">
+                <!-- todo -->
+            </Preference>
         </PreferenceScreen>
     </PreferenceCategory>
 
