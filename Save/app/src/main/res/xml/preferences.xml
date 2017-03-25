@@ -15,28 +15,37 @@
         <!-- user sub-preferences -->
         <PreferenceScreen
             android:title="User">
-            <EditTextPreference
-                android:key="pref_key_api_username"
-                android:summary="Username"
-                android:dialogTitle="Set your username"
-                android:dialogIcon="@drawable/ic_pref_api_username_dialog"
-                android:negativeButtonText="@string/cancel"
-                android:positiveButtonText="@string/accept" />
+            <PreferenceCategory
+                android:title="Log in">
+                <EditTextPreference
+                    android:key="pref_key_api_username"
+                    android:summary="Username"
+                    android:dialogTitle="Set your username"
+                    android:dialogIcon="@drawable/ic_pref_api_username_dialog"
+                    android:negativeButtonText="@string/cancel"
+                    android:positiveButtonText="@string/accept" />
 
-            <EditTextPreference
-                android:key="pref_key_api_password"
-                android:summary="Password"
-                android:dialogTitle="Set your password"
-                android:password="true"
-                android:dialogIcon="@drawable/ic_pref_api_password_dialog"
-                android:negativeButtonText="@string/cancel"
-                android:positiveButtonText="@string/accept" />
+                <EditTextPreference
+                    android:key="pref_key_api_password"
+                    android:summary="Password"
+                    android:dialogTitle="Set your password"
+                    android:password="true"
+                    android:dialogIcon="@drawable/ic_pref_api_password_dialog"
+                    android:negativeButtonText="@string/cancel"
+                    android:positiveButtonText="@string/accept" />
+            </PreferenceCategory>
 
-            <Preference
-                android:title="Register an account"
-                android:dependency="pref_key_api_url">
-                <!-- todo -->
-            </Preference>
+            <PreferenceCategory
+                android:title="Sign up">
+                <Preference
+                    android:title="Register an account"
+                    android:summary="Create a new account you can use to login."
+                    android:dependency="pref_key_api_url">
+                    <intent android:action="android.intent.action.VIEW"
+                        android:targetClass="com.github.albalitz.save.activities.RegisterActivity"
+                        android:targetPackage="com.github.albalitz.save" />
+                </Preference>
+            </PreferenceCategory>
         </PreferenceScreen>
     </PreferenceCategory>
 

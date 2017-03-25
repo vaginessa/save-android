@@ -24,7 +24,13 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:theme="@style/PreferenceTheme" />
-        <activity android:name=".activities.RegisterActivity"></activity>
+        <activity android:name=".activities.RegisterActivity"
+            android:label="Register">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
