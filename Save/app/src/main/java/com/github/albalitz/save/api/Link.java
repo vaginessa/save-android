@@ -29,16 +29,22 @@ public class Link {
      * Create a Link instance from its attributes,
      * e.g. when creating one using a button.
      */
-    public Link(String url, String annotation, String createdOn, String updatedOn) {
-        this.id = -1;
+    public Link(String url, String annotation) {
         this.url = url;
         this.annotation = annotation;
-        this.createdOn = createdOn;
-        this.updatedOn = updatedOn;
     }
 
     public String toString() {
         return this.annotation + " (" + this.url + ")";
+    }
+
+    public JSONObject json() throws JSONException {
+        JSONObject json = new JSONObject();
+
+        json.put("url", this.url);
+        json.put("annotation", this.annotation);
+
+        return json;
     }
 
     public int id() {
