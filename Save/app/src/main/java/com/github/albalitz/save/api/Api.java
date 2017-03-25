@@ -31,6 +31,7 @@ public class Api {
         this.callingActivity = callingActivity;
     }
 
+
     public void updateSavedLinks() {
         String url = this.prefs.getString("pref_key_api_url", null);
         if (url == null) {
@@ -82,6 +83,7 @@ public class Api {
                 null,  // request params
                 jsonHttpResponseHandler);
     }
+
 
     public void saveLink(Link link) throws JSONException, UnsupportedEncodingException {
         Log.d("api", "Saving link: " + link.toString() + " ...");
@@ -156,6 +158,44 @@ public class Api {
                 prefs.getString("pref_key_api_username", null),
                 prefs.getString("pref_key_api_password", null),
                 null,  // request params
+                jsonHttpResponseHandler);
+    }
+
+
+    public void registerUser(final String username, String password) throws JSONException, UnsupportedEncodingException {
+        Log.d("api", "Registering user ...");
+
+        String url = this.prefs.getString("pref_key_api_url", null);
+        if (url == null) {
+            Log.e(this.toString(), "No URL set in the preferences!");
+            return;
+        } else {
+            url += "/register";
+        }
+
+        JsonHttpResponseHandler jsonHttpResponseHandler = new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (!response.has("success")) {
+                    // todo: show error
+                }
+
+                Utils.showSnackbar((SnackbarActivity) callingActivity, "Welcome, " + username + "!");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.e("api.register failure", errorResponse.toString());
+            }
+        };
+
+        JSONObject json = new JSONObject();
+        json.put("uname", username);
+        json.put("pass", password);
+        Request.post(url,
+                prefs.getString("pref_key_api_username", null),
+                prefs.getString("pref_key_api_password", null),
+                json,
                 jsonHttpResponseHandler);
     }
 }
