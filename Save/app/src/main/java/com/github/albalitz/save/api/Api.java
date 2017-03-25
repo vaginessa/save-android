@@ -1,6 +1,5 @@
 package com.github.albalitz.save.api;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -9,12 +8,15 @@ import com.github.albalitz.save.activities.SavedLinksListActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
 import com.github.albalitz.save.utils.Utils;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -80,6 +82,43 @@ public class Api {
                 prefs.getString("pref_key_api_username", null),
                 prefs.getString("pref_key_api_password", null),
                 null,  // request params
+                jsonHttpResponseHandler);
+    }
+
+    public void saveLink(Link link) throws JSONException, UnsupportedEncodingException {
+        Log.d("api", "Saving link: " + link.toString() + " ...");
+
+        String url = this.prefs.getString("pref_key_api_url", null);
+        if (url == null) {
+            Log.e(this.toString(), "No URL set in the preferences!");
+            return;
+        } else {
+            url += "/save";
+        }
+
+        JsonHttpResponseHandler jsonHttpResponseHandler = new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (!response.has("success")) {
+                    // todo: show error
+                }
+
+                Utils.showSnackbar((SnackbarActivity) callingActivity, "Saved link.");
+
+                // also update the list view
+                updateSavedLinks();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.e("api.saveLink failure", errorResponse.toString());
+            }
+        };
+
+        Request.post(url,
+                prefs.getString("pref_key_api_username", null),
+                prefs.getString("pref_key_api_password", null),
+                link.json(),
                 jsonHttpResponseHandler);
     }
 
