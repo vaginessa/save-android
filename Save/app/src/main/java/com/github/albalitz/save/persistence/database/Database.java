@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
@@ -32,6 +33,7 @@ public class Database implements SavePersistenceOption {
 
     @Override
     public void updateSavedLinks() {
+        Log.d(this.toString(), "Updating saved links list from local database...");
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 SaveDbContract.LinkEntry._ID,
@@ -62,11 +64,13 @@ public class Database implements SavePersistenceOption {
         }
         cursor.close();
 
+        Log.d(this.toString(), "Found " + savedLinks.size() + " saved links.");
         callingActivity.onSavedLinksUpdate(savedLinks);
     }
 
     @Override
     public void saveLink(Link link) throws JSONException, UnsupportedEncodingException {
+        Log.d(this.toString(), "Saving link: " + link.toString() + " ...");
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -81,6 +85,7 @@ public class Database implements SavePersistenceOption {
 
     @Override
     public void deleteLink(Link link) {
+        Log.d(this.toString(), "Deleting link: " + link.toString() + "...");
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String selection = SaveDbContract.LinkEntry._ID + " WHERE ?";
