@@ -7,7 +7,7 @@ import com.github.albalitz.save.SaveApplication;
 import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
 import com.github.albalitz.save.persistence.Link;
-import com.github.albalitz.save.persistence.SavePersistence;
+import com.github.albalitz.save.persistence.SavePersistenceOption;
 import com.github.albalitz.save.utils.Utils;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -23,7 +23,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by albalitz on 3/24/17.
  */
-public class Api implements SavePersistence {
+public class Api implements SavePersistenceOption {
 
     private SharedPreferences prefs;
     private ApiActivity callingActivity;

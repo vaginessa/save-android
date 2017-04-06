@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
 import com.github.albalitz.save.persistence.Link;
-import com.github.albalitz.save.persistence.SavePersistence;
+import com.github.albalitz.save.persistence.SavePersistenceOption;
 import com.github.albalitz.save.utils.Utils;
 
 import org.json.JSONException;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by albalitz on 4/6/17.
  */
-public class Database implements SavePersistence {
+public class Database implements SavePersistenceOption {
 
     private ApiActivity callingActivity;
 
@@ -87,5 +87,10 @@ public class Database implements SavePersistence {
         String[] selectionArgs = {Integer.toString(link.id())};
 
         db.delete(SaveDbContract.LinkEntry.TABLE_NAME, selection, selectionArgs);
+    }
+
+    @Override
+    public void registerUser(String username, String password) throws JSONException, UnsupportedEncodingException {
+        Utils.showToast((Context) callingActivity, "Local storage doesn't require registration.");
     }
 }

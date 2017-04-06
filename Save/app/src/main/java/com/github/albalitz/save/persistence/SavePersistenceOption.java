@@ -10,8 +10,9 @@ import java.io.UnsupportedEncodingException;
  *
  * Created by albalitz on 4/6/17.
  */
-public interface SavePersistence {
+public interface SavePersistenceOption {
     void updateSavedLinks();
     void saveLink(Link link) throws JSONException, UnsupportedEncodingException;
     void deleteLink(Link link);
+    void registerUser(final String username, final String password) throws JSONException, UnsupportedEncodingException;
 }
