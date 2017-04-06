@@ -6,7 +6,8 @@
 
         <EditTextPreference
             android:key="pref_key_api_url"
-            android:summary="URL"
+            android:title="URL"
+            android:summary="URL to your API"
             android:dialogTitle="Set the URL to the API"
             android:dialogIcon="@drawable/ic_pref_api_url_dialog"
             android:negativeButtonText="@string/cancel"
