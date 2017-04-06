@@ -7,6 +7,7 @@ import com.github.albalitz.save.SaveApplication;
 import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
 import com.github.albalitz.save.persistence.Link;
+import com.github.albalitz.save.persistence.SavePersistence;
 import com.github.albalitz.save.utils.Utils;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,7 +23,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by albalitz on 3/24/17.
  */
-public class Api {
+public class Api implements SavePersistence {
 
     private SharedPreferences prefs;
     private ApiActivity callingActivity;
@@ -33,6 +34,7 @@ public class Api {
     }
 
 
+    @Override
     public void updateSavedLinks() {
         String url = this.prefs.getString("pref_key_api_url", null);
         if (url == null) {
@@ -86,6 +88,7 @@ public class Api {
     }
 
 
+    @Override
     public void saveLink(Link link) throws JSONException, UnsupportedEncodingException {
         Log.d("api", "Saving link: " + link.toString() + " ...");
 
@@ -124,6 +127,7 @@ public class Api {
     }
 
 
+    @Override
     public void deleteLink(Link link) {
         Log.d("api", "Deleting link: " + link.toString() + " ...");
 
