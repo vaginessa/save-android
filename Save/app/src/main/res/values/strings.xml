@@ -2,9 +2,6 @@
     <string name="app_name">Save</string>
     <string name="action_settings">Settings</string>
 
-    <!-- preferences -->
-    <string name="pref_api_cat_title">API</string>
-
     <!-- registration -->
     <string name="button_register">Register</string>
 
