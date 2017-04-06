@@ -88,10 +88,14 @@ public class Database implements SavePersistenceOption {
         Log.d(this.toString(), "Deleting link: " + link.toString() + "...");
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String selection = SaveDbContract.LinkEntry._ID + " WHERE ?";
+        String selection = SaveDbContract.LinkEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(link.id())};
 
         db.delete(SaveDbContract.LinkEntry.TABLE_NAME, selection, selectionArgs);
+
+        Utils.showSnackbar((SnackbarActivity) callingActivity, "Deleted link.");
+        // also update the list view
+        updateSavedLinks();
     }
 
     @Override
