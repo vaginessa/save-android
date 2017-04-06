@@ -37,17 +37,17 @@
                     android:positiveButtonText="@string/accept" />
             </PreferenceCategory>
 
-            <!--<PreferenceCategory-->
-                <!--android:title="Sign up">-->
-                <!--<Preference-->
-                    <!--android:title="Register a new account"-->
-                    <!--android:summary="Create a new account you can use to login."-->
-                    <!--android:dependency="pref_key_api_url">-->
-                    <!--<intent android:action="android.intent.action.VIEW"-->
-                        <!--android:targetClass="com.github.albalitz.save.activities.RegisterActivity"-->
-                        <!--android:targetPackage="com.github.albalitz.save" />-->
-                <!--</Preference>-->
-            <!--</PreferenceCategory>-->
+            <PreferenceCategory
+                android:title="Sign up">
+                <Preference
+                    android:title="Register a new account"
+                    android:summary="Create a new account you can use to login."
+                    android:dependency="pref_key_api_url">
+                    <intent android:action="android.intent.action.VIEW"
+                        android:targetClass="com.github.albalitz.save.activities.RegisterActivity"
+                        android:targetPackage="com.github.albalitz.save" />
+                </Preference>
+            </PreferenceCategory>
         </PreferenceScreen>
     </PreferenceCategory>
 
