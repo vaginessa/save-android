@@ -26,6 +26,19 @@ public class Link {
     }
 
     /**
+     * Create a Link instance from attributes,
+     * including the id, e.g. from the local database.
+     * @param id
+     * @param url
+     * @param annotation
+     */
+    public Link(int id, String url, String annotation) {
+        this.id = id;
+        this.url = url;
+        this.annotation = annotation;
+    }
+
+    /**
      * Create a Link instance from its attributes,
      * e.g. when creating one using a button.
      */
