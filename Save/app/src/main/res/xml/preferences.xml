@@ -15,7 +15,8 @@
 
         <!-- user sub-preferences -->
         <PreferenceScreen
-            android:title="User">
+            android:title="User"
+            android:dependency="pref_key_api_url">
             <PreferenceCategory
                 android:title="Log in">
                 <EditTextPreference
