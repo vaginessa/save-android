@@ -1,6 +1,5 @@
 package com.github.albalitz.save.activities;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -15,15 +14,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.albalitz.save.R;
 import com.github.albalitz.save.SaveApplication;
-import com.github.albalitz.save.api.Api;
-import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.persistence.SavePersistenceOption;
+import com.github.albalitz.save.persistence.api.Api;
+import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
 import com.github.albalitz.save.fragments.SaveLinkDialogFragment;
+import com.github.albalitz.save.persistence.database.Database;
 import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.LinkAdapter;
 import com.github.albalitz.save.utils.Utils;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Link> savedLinks;
     private Link selectedLink;
 
-    private Api api;
+    private SavePersistenceOption storage;
 
     private SharedPreferences prefs = SaveApplication.getSharedPreferences();
 
@@ -64,7 +64,11 @@ public class MainActivity extends AppCompatActivity
         listViewSavedLinks = (ListView) findViewById(R.id.listViewSavedLinks);
 
         // prepare stuff
-        api = new Api(this);
+        if (prefs.getBoolean("pref_key_use_api_or_local", false)) {
+            storage = new Api(this);
+        } else {
+            storage = new Database(this);
+        }
         prepareListViewListeners();
         swipeRefreshLayout.setOnRefreshListener(this);
 
@@ -78,20 +82,27 @@ public class MainActivity extends AppCompatActivity
         });
 
         // do actual stuff
-        if (prefs.getString("pref_key_api_url", "").isEmpty()) {
-            Utils.showToast(context, "Please configure the API's URL.");
-            ActivityUtils.openSettings(this);
+        /*
+         * Check for configuration and let the user know what to do accordingly:
+         * - ask to register
+         * - ask to configure api url
+         */
+        if (prefs.getBoolean("pref_key_use_api_or_local", false)) {
+            if (prefs.getString("pref_key_api_url", "").isEmpty()) {
+                Utils.showToast(context, "Please configure the API's URL.");
+                ActivityUtils.openSettings(this);
+            } else {
+                if (prefs.getString("pref_key_api_username", "").isEmpty()
+                        || prefs.getString("pref_key_api_password", "").isEmpty()) {
+                    Log.w(this.toString(), "No credentials found. Opening registration.");
+                    Utils.showToast(context, "No credentials found for API. Please register.");
+                    Intent intent = new Intent(this, RegisterActivity.class);
+                    startActivity(intent);
+                }
+            }
         }
 
-        if (prefs.getString("pref_key_api_username", "").isEmpty()
-                || prefs.getString("pref_key_api_password", "").isEmpty()) {
-            Log.w(this.toString(), "No credentials found. Opening registration.");
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
-        }
-
-
-        api.updateSavedLinks();
+        storage.updateSavedLinks();
 
         // Handle stuff being shared to this app from another app
         Intent intent = getIntent();
@@ -116,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
         Utils.showSnackbar(this, "Saving link...");
         try {
-            api.saveLink(link);
+            storage.saveLink(link);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -182,8 +193,8 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    public Api getApi() {
-        return this.api;
+    public SavePersistenceOption getStorage() {
+        return this.storage;
     }
 
     /*
@@ -204,7 +215,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        api.deleteLink(selectedLink);
+        storage.deleteLink(selectedLink);
     }
 
     @Override
@@ -225,6 +236,6 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onRefresh() {
-        api.updateSavedLinks();
+        storage.updateSavedLinks();
     }
 }

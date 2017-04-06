@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.albalitz.save.R;
-import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.persistence.Link;
 
 import java.util.ArrayList;
 

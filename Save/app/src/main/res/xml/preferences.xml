@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/pref_api_cat_title"
+        android:title="Storage"
+        android:key="pref_key_storage_settings">
+        <SwitchPreference
+            android:key="pref_key_use_api_or_local"
+            android:title="Storage method"
+            android:summaryOn="Using a remote API."
+            android:summaryOff="Using local storage on your phone."
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="API"
         android:key="pref_key_api_settings">
 
         <EditTextPreference
             android:key="pref_key_api_url"
+            android:dependency="pref_key_use_api_or_local"
             android:title="URL"
             android:summary="URL to your API"
             android:dialogTitle="Set the URL to the API"

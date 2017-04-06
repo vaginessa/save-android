@@ -1,4 +1,4 @@
-package com.github.albalitz.save.api;
+package com.github.albalitz.save.persistence;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +23,19 @@ public class Link {
         this.annotation = json.getString("annotation");
         this.createdOn = json.getString("created_on");
         this.updatedOn = json.getString("updated_on");
+    }
+
+    /**
+     * Create a Link instance from attributes,
+     * including the id, e.g. from the local database.
+     * @param id
+     * @param url
+     * @param annotation
+     */
+    public Link(int id, String url, String annotation) {
+        this.id = id;
+        this.url = url;
+        this.annotation = annotation;
     }
 
     /**

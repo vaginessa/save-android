@@ -1,6 +1,6 @@
 package com.github.albalitz.save.activities;
 
-import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.persistence.Link;
 
 import java.util.ArrayList;
 

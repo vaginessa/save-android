@@ -1,4 +1,4 @@
-package com.github.albalitz.save.api;
+package com.github.albalitz.save.persistence.api;
 
 import com.github.albalitz.save.SaveApplication;
 import com.loopj.android.http.AsyncHttpClient;
