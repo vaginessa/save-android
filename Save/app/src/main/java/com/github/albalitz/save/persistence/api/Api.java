@@ -1,4 +1,4 @@
-package com.github.albalitz.save.api;
+package com.github.albalitz.save.persistence.api;
 
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -6,6 +6,7 @@ import android.util.Log;
 import com.github.albalitz.save.SaveApplication;
 import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
+import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.utils.Utils;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

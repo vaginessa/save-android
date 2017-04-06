@@ -7,13 +7,12 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.github.albalitz.save.R;
 import com.github.albalitz.save.activities.MainActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
-import com.github.albalitz.save.api.Api;
-import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.persistence.api.Api;
+import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.utils.Utils;
 
 import org.json.JSONException;

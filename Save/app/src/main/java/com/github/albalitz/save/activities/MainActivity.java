@@ -1,6 +1,5 @@
 package com.github.albalitz.save.activities;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.albalitz.save.R;
 import com.github.albalitz.save.SaveApplication;
-import com.github.albalitz.save.api.Api;
-import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.persistence.api.Api;
+import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
 import com.github.albalitz.save.fragments.SaveLinkDialogFragment;
 import com.github.albalitz.save.utils.ActivityUtils;

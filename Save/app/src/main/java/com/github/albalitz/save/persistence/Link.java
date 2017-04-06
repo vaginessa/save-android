@@ -1,4 +1,4 @@
-package com.github.albalitz.save.api;
+package com.github.albalitz.save.persistence;
 
 import org.json.JSONException;
 import org.json.JSONObject;

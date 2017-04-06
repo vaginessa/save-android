@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.github.albalitz.save.R;
-import com.github.albalitz.save.api.Api;
-import com.github.albalitz.save.api.Link;
+import com.github.albalitz.save.persistence.api.Api;
+import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.utils.Utils;
 
 import org.json.JSONException;
