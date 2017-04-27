@@ -14,8 +14,3 @@ Saved link and confirmation
 - Use local storage or api  
   In the preferences screen, you can choose to use the api (I haven't open sourced that one yet, but will probably do that soon).
 
-## todo
-- Allow editing a link received from another app before actually saving
-- Edit saved links
-- Export saved links
-- Move locally saved links to api and vice versa
