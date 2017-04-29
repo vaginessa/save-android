@@ -24,6 +24,7 @@ import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
 import com.github.albalitz.save.fragments.SaveLinkDialogFragment;
 import com.github.albalitz.save.persistence.database.Database;
+import com.github.albalitz.save.persistence.export.SavedLinksExporter;
 import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.LinkAdapter;
 import com.github.albalitz.save.utils.Utils;
@@ -150,6 +151,9 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.action_settings:
                 ActivityUtils.openSettings(this);
+                return true;
+            case R.id.action_export:
+                SavedLinksExporter.export(savedLinks);
                 return true;
         }
 
