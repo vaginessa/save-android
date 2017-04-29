@@ -34,6 +34,9 @@ public class Api implements SavePersistenceOption {
     }
 
 
+    // todo: support changing sort direction
+
+
     @Override
     public void updateSavedLinks() {
         String url = this.prefs.getString("pref_key_api_url", null);

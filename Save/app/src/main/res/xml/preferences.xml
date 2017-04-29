@@ -62,6 +62,13 @@
                 </PreferenceCategory>
             </PreferenceScreen>
         </PreferenceScreen>
+
+        <SwitchPreference
+            android:key="pref_key_sort_ascending"
+            android:title="Sort direction"
+            android:summaryOn="Sort oldest first."
+            android:summaryOff="Sort newest first."
+            android:defaultValue="true" />
     </PreferenceCategory>
 
     <PreferenceCategory
