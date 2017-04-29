@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Save</string>
+
+    <!-- menu -->
     <string name="action_settings">Settings</string>
+    <string name="action_export">Export</string>
 
     <!-- registration -->
     <string name="button_register">Register</string>
