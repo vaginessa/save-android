@@ -76,9 +76,14 @@
         <Preference
             android:title="Developed by Aljosha Balitzki" />
         <Preference
-            android:title="View repository">
+            android:title="View source code">
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/albalitz/save-android" />
+        </Preference>
+        <Preference
+            android:title="Report a bug">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/albalitz/save-android/issues" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
