@@ -25,6 +25,7 @@ public class SavedLinksExporter {
 
         if (savedLinks.isEmpty()) {
             Utils.showToast(SaveApplication.getAppContext(), "Nothing to export. Save something first. ;)");
+            return false;
         }
 
         JSONArray savedLinksJson = new JSONArray();
