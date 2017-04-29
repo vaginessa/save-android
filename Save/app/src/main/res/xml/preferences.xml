@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Storage"
+        android:title="Links"
         android:key="pref_key_storage_settings">
         <SwitchPreference
             android:key="pref_key_use_api_or_local"
@@ -9,58 +9,66 @@
             android:summaryOn="Using a remote API."
             android:summaryOff="Using local storage on your phone."
             android:defaultValue="false" />
-    </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="API"
-        android:key="pref_key_api_settings">
-
-        <EditTextPreference
-            android:key="pref_key_api_url"
-            android:dependency="pref_key_use_api_or_local"
-            android:title="URL"
-            android:summary="URL to your API"
-            android:dialogTitle="Set the URL to the API"
-            android:dialogIcon="@drawable/ic_pref_api_url_dialog"
-            android:negativeButtonText="@string/cancel"
-            android:positiveButtonText="@string/accept" />
-
-        <!-- user sub-preferences -->
         <PreferenceScreen
-            android:title="User"
-            android:dependency="pref_key_api_url">
-            <PreferenceCategory
-                android:title="Log in">
-                <EditTextPreference
-                    android:key="pref_key_api_username"
-                    android:summary="Username"
-                    android:dialogTitle="Set your username"
-                    android:dialogIcon="@drawable/ic_pref_api_username_dialog"
-                    android:negativeButtonText="@string/cancel"
-                    android:positiveButtonText="@string/accept" />
+            android:title="API Settings"
+            android:key="pref_key_api_settings"
+            android:dependency="pref_key_use_api_or_local" >
 
-                <EditTextPreference
-                    android:key="pref_key_api_password"
-                    android:summary="Password"
-                    android:dialogTitle="Set your password"
-                    android:password="true"
-                    android:dialogIcon="@drawable/ic_pref_api_password_dialog"
-                    android:negativeButtonText="@string/cancel"
-                    android:positiveButtonText="@string/accept" />
-            </PreferenceCategory>
+            <EditTextPreference
+                android:key="pref_key_api_url"
+                android:dependency="pref_key_use_api_or_local"
+                android:title="URL"
+                android:summary="URL to your API"
+                android:dialogTitle="Set the URL to the API"
+                android:dialogIcon="@drawable/ic_pref_api_url_dialog"
+                android:negativeButtonText="@string/cancel"
+                android:positiveButtonText="@string/accept" />
 
-            <PreferenceCategory
-                android:title="Sign up">
-                <Preference
-                    android:title="Register a new account"
-                    android:summary="Create a new account you can use to login."
-                    android:dependency="pref_key_api_url">
-                    <intent android:action="android.intent.action.VIEW"
-                        android:targetClass="com.github.albalitz.save.activities.RegisterActivity"
-                        android:targetPackage="com.github.albalitz.save" />
-                </Preference>
-            </PreferenceCategory>
+            <!-- user sub-preferences -->
+            <PreferenceScreen
+                android:title="User"
+                android:dependency="pref_key_api_url">
+                <PreferenceCategory
+                    android:title="Log in">
+                    <EditTextPreference
+                        android:key="pref_key_api_username"
+                        android:summary="Username"
+                        android:dialogTitle="Set your username"
+                        android:dialogIcon="@drawable/ic_pref_api_username_dialog"
+                        android:negativeButtonText="@string/cancel"
+                        android:positiveButtonText="@string/accept" />
+
+                    <EditTextPreference
+                        android:key="pref_key_api_password"
+                        android:summary="Password"
+                        android:dialogTitle="Set your password"
+                        android:password="true"
+                        android:dialogIcon="@drawable/ic_pref_api_password_dialog"
+                        android:negativeButtonText="@string/cancel"
+                        android:positiveButtonText="@string/accept" />
+                </PreferenceCategory>
+
+                <PreferenceCategory
+                    android:title="Sign up">
+                    <Preference
+                        android:title="Register a new account"
+                        android:summary="Create a new account you can use to login."
+                        android:dependency="pref_key_api_url">
+                        <intent android:action="android.intent.action.VIEW"
+                            android:targetClass="com.github.albalitz.save.activities.RegisterActivity"
+                            android:targetPackage="com.github.albalitz.save" />
+                    </Preference>
+                </PreferenceCategory>
+            </PreferenceScreen>
         </PreferenceScreen>
+
+        <SwitchPreference
+            android:key="pref_key_sort_ascending"
+            android:title="Sort direction"
+            android:summaryOn="Sort oldest first."
+            android:summaryOff="Sort newest first."
+            android:defaultValue="true" />
     </PreferenceCategory>
 
     <PreferenceCategory

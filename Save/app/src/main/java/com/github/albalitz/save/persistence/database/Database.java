@@ -2,10 +2,12 @@ package com.github.albalitz.save.persistence.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.github.albalitz.save.SaveApplication;
 import com.github.albalitz.save.activities.ApiActivity;
 import com.github.albalitz.save.activities.SnackbarActivity;
 import com.github.albalitz.save.persistence.Link;
@@ -23,12 +25,13 @@ import java.util.ArrayList;
 public class Database implements SavePersistenceOption {
 
     private ApiActivity callingActivity;
-
     private SaveDbHelper dbHelper;
+    private SharedPreferences prefs;
 
     public Database(ApiActivity callingActivity) {
         this.callingActivity = callingActivity;
         this.dbHelper = new SaveDbHelper((Context) callingActivity);
+        this.prefs = SaveApplication.getSharedPreferences();
     }
 
     @Override
@@ -41,7 +44,13 @@ public class Database implements SavePersistenceOption {
                 SaveDbContract.LinkEntry.COLUM_NAME_ANNOTATION
         };
 
-        String sortOrder = SaveDbContract.LinkEntry._ID + " ASC";
+        String sortDirection = "";
+        if (prefs.getBoolean("pref_key_sort_ascending", true)) {
+            sortDirection = "ASC";
+        } else {
+            sortDirection = "DESC";
+        }
+        String sortOrder = SaveDbContract.LinkEntry._ID + " " + sortDirection;
 
         Cursor cursor = db.query(
                 SaveDbContract.LinkEntry.TABLE_NAME,
