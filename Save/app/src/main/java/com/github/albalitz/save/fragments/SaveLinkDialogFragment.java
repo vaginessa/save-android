@@ -26,6 +26,24 @@ public class SaveLinkDialogFragment extends DialogFragment {
 
     private Activity listener;
 
+    private String url;
+
+    /**
+     * Standard constructor.
+     * This is used when e.g. the user clicks on the create button.
+     * Opens the dialog with no pre-known data.
+     */
+    public SaveLinkDialogFragment() {}
+
+    /**
+     * Constructor with only the URL known.
+     * This is used when e.g. a link is shared to this app from another app.
+     *
+     * @param url The URL passed to the dialog and set as the URL textbox's content.
+     */
+    public SaveLinkDialogFragment(String url) {
+        this.url = url;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -66,7 +84,18 @@ public class SaveLinkDialogFragment extends DialogFragment {
                 // User cancelled the dialog
             }
         });
+        AlertDialog dialog = builder.create();
 
-        return builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                if (!url.isEmpty()) {
+                    EditText urlEditText = (EditText) getDialog().findViewById(R.id.save_dialog_link_url);
+                    urlEditText.setText(url);
+                }
+            }
+        });
+
+        return dialog;
     }
 }
