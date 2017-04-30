@@ -19,4 +19,7 @@
 
     <!-- link save dialog -->
     <string name="dialog_save_link_title">Save a link</string>
+
+    <!-- link sharing -->
+    <string name="share_destination_chooser">Share link via...</string>
 </resources>

@@ -214,6 +214,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onSelectLinkShare(DialogFragment dialog) {
+    }
+
+    @Override
     public void onSelectLinkDelete(DialogFragment dialog) {
         if (selectedLink == null) {
             return;
