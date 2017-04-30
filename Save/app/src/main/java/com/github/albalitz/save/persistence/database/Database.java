@@ -34,6 +34,8 @@ public class Database implements SavePersistenceOption {
         this.prefs = SaveApplication.getSharedPreferences();
     }
 
+    // todo: edit a link
+
     @Override
     public void updateSavedLinks() {
         Log.d(this.toString(), "Updating saved links list from local database...");

@@ -124,16 +124,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         Log.d(this.toString(), "Got shared text: " + sharedText);
-        Link link = new Link(sharedText, "");  // todo: allow user to edit before saving
-
-        Utils.showSnackbar(this, "Saving link...");
-        try {
-            storage.saveLink(link);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        SaveLinkDialogFragment saveLinkDialogFragment = new SaveLinkDialogFragment(sharedText);
+        saveLinkDialogFragment.show(getFragmentManager(), "save");
     }
 
     @Override

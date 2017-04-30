@@ -33,9 +33,7 @@ public class Api implements SavePersistenceOption {
         this.callingActivity = callingActivity;
     }
 
-
-    // todo: support changing sort direction
-
+    // todo: edit a link
 
     @Override
     public void updateSavedLinks() {
