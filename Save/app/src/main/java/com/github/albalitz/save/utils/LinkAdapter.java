@@ -1,6 +1,7 @@
 package com.github.albalitz.save.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,12 @@ public class LinkAdapter extends ArrayAdapter<Link> {
         TextView textViewAnnotation = (TextView) convertView.findViewById(R.id.savedLinkAnnotation);
 
         textViewUrl.setText(link.url());
-        textViewAnnotation.setText(link.annotation());
+        if (link.annotation().isEmpty()) {
+            Log.d(this.toString(), "Hiding empty annotation for link: " + link.url() + ".");
+            textViewAnnotation.setVisibility(View.GONE);
+        } else {
+            textViewAnnotation.setText(link.annotation());
+        }
 
         return convertView;
     }
