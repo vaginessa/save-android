@@ -20,6 +20,7 @@ public class LinkActionsDialogFragment extends DialogFragment {
     public interface LinkActionListener {
         void onSelectLinkOpen(DialogFragment dialog);
         void onSelectLinkDelete(DialogFragment dialog);
+        void onSelectLinkShare(DialogFragment dialog);
         void onDialogDismiss(DialogFragment dialog);
     }
 
@@ -37,6 +38,9 @@ public class LinkActionsDialogFragment extends DialogFragment {
                                 listener.onSelectLinkOpen(LinkActionsDialogFragment.this);
                                 break;
                             case 1:
+                                listener.onSelectLinkShare(LinkActionsDialogFragment.this);
+                                break;
+                            case 2:
                                 listener.onSelectLinkDelete(LinkActionsDialogFragment.this);
                                 break;
                         }

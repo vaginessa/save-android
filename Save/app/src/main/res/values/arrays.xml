@@ -3,6 +3,7 @@
     <!-- actions for the link actions dialog -->
     <string-array name="link_actions_keys">
         <item>Open</item>
+        <item>Share</item>
         <item>Delete</item>
     </string-array>
 </resources>

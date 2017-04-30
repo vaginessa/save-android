@@ -214,6 +214,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onSelectLinkShare(DialogFragment dialog) {
+        if (selectedLink == null) {
+            return;
+        }
+
+        Intent shareLinkIntent = new Intent();
+        shareLinkIntent.setAction(Intent.ACTION_SEND);
+        shareLinkIntent.putExtra(Intent.EXTRA_TEXT, selectedLink.url());
+        shareLinkIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareLinkIntent, getResources().getText(R.string.share_destination_chooser)));
+    }
+
+    @Override
     public void onSelectLinkDelete(DialogFragment dialog) {
         if (selectedLink == null) {
             return;
