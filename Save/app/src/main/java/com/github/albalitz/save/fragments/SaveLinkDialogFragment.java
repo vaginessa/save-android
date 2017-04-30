@@ -27,6 +27,7 @@ public class SaveLinkDialogFragment extends DialogFragment {
     private Activity listener;
 
     private String url;
+    // todo: support editing already saved links - 3rd constructor with Link?
 
     /**
      * Standard constructor.
