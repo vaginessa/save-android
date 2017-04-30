@@ -10,7 +10,8 @@ Saved link and confirmation
 
 ## features
 - Save from another app  
-  You can select this app from another app's share screen to save links directly to this app.
+  You can select this app from another app's share screen to save links directly to this app.  
+  This will also allow you to edit the link and add an annotation.
 - Use local storage or api  
   In the preferences screen, you can choose to use the [api](https://github.com/albalitz/save-api).
 - Choose the sort order  
@@ -18,3 +19,5 @@ Saved link and confirmation
 - Export  
   Save your saved links to a json file on your phone's external storage.  
   Currently /sdcard/Documents/Save/save-link-export.json
+- Share links to other apps  
+  send your links to another app to share with friends, or save in another app
