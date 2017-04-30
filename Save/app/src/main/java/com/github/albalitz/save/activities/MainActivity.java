@@ -124,7 +124,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         Log.d(this.toString(), "Got shared text: " + sharedText);
-        SaveLinkDialogFragment saveLinkDialogFragment = new SaveLinkDialogFragment(sharedText);
+        SaveLinkDialogFragment saveLinkDialogFragment = new SaveLinkDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("url", sharedText);
+        saveLinkDialogFragment.setArguments(args);
         saveLinkDialogFragment.show(getFragmentManager(), "save");
     }
 

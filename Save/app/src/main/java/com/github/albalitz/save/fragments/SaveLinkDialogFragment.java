@@ -27,24 +27,7 @@ public class SaveLinkDialogFragment extends DialogFragment {
     private Activity listener;
 
     private String url;
-    // todo: support editing already saved links - 3rd constructor with Link?
-
-    /**
-     * Standard constructor.
-     * This is used when e.g. the user clicks on the create button.
-     * Opens the dialog with no pre-known data.
-     */
-    public SaveLinkDialogFragment() {}
-
-    /**
-     * Constructor with only the URL known.
-     * This is used when e.g. a link is shared to this app from another app.
-     *
-     * @param url The URL passed to the dialog and set as the URL textbox's content.
-     */
-    public SaveLinkDialogFragment(String url) {
-        this.url = url;
-    }
+    // todo: support editing already saved links
 
     @Override
     public void onAttach(Activity activity) {
@@ -90,6 +73,14 @@ public class SaveLinkDialogFragment extends DialogFragment {
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
+                Bundle args = getArguments();
+                if (args == null) {
+                    // this happens, when opening this dialog without arguments,
+                    // i.e. when pressing the FAB to save a link without having previous data.
+                    return;
+                }
+
+                url = args.getString("url", null);
                 if (!url.isEmpty()) {
                     EditText urlEditText = (EditText) getDialog().findViewById(R.id.save_dialog_link_url);
                     urlEditText.setText(url);
