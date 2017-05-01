@@ -18,20 +18,17 @@ import android.widget.ListView;
 
 import com.github.albalitz.save.R;
 import com.github.albalitz.save.SaveApplication;
-import com.github.albalitz.save.persistence.SavePersistenceOption;
-import com.github.albalitz.save.persistence.api.Api;
-import com.github.albalitz.save.persistence.Link;
 import com.github.albalitz.save.fragments.LinkActionsDialogFragment;
 import com.github.albalitz.save.fragments.SaveLinkDialogFragment;
+import com.github.albalitz.save.persistence.Link;
+import com.github.albalitz.save.persistence.SavePersistenceOption;
+import com.github.albalitz.save.persistence.api.Api;
 import com.github.albalitz.save.persistence.database.Database;
 import com.github.albalitz.save.persistence.export.SavedLinksExporter;
 import com.github.albalitz.save.utils.ActivityUtils;
 import com.github.albalitz.save.utils.LinkAdapter;
 import com.github.albalitz.save.utils.Utils;
 
-import org.json.JSONException;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -114,6 +111,12 @@ public class MainActivity extends AppCompatActivity
                 handleSendIntent(intent);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        storage.updateSavedLinks();
     }
 
     private void handleSendIntent(Intent intent) {
